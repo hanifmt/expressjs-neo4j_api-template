@@ -1,0 +1,87 @@
+swagger: '2.0'
+info:
+  description: >-
+    This is a Interface Server HexaCode.  You can find out more
+    about     Swagger at [http://swagger.io](http://swagger.io) or on
+    [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample,
+    you can use the api key `special-key` to test the authorization     filters.
+  version: 1.0.0
+  title: REST_API LEARNING (Application Program Interface)
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: apiteam@hexacode.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: 'localhost:8080'
+basePath: /api
+tags:
+  - name: Test
+    description: fot testing
+schemes:
+  - http
+paths:
+  /test:
+    get:
+      tags:
+        - Test
+      summary: get all Testing
+      description: >-
+        You can Testing here
+      produces:
+        - application/json
+      security:
+        - api_key: []
+      responses:
+        '200':
+          description: successful operation
+        '204':
+          description: Record not found
+        '400':
+          description: Invalid value
+      deprecated: false
+securityDefinitions:
+  basic:
+    type: basic
+  uimaxnetb_auth:
+    type: oauth2
+    authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+    flow: implicit
+    scopes:
+      'write:uimax': modify uimax in your account
+      'read:uimax': read your uimax
+  api_key:
+    type: apiKey
+    name: x-api-key
+    in: header
+definitions:
+  Test:
+    type: object
+    properties:
+      status:
+        type: string
+        example: 200
+      message:
+        type: string
+        example: succes
+      data:
+        $ref: "#/definitions/TestData"
+  TestData:
+    type: object
+    properties:
+      name:
+        type: string
+        example: Testing
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
+externalDocs:
+  description: Find out more about HexaCode
+  url: 'http://hexacode-techInc.com'
